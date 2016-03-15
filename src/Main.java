@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Readcsv csv_obj = new Readcsv();
+		ReadCSV csv_obj = new ReadCSV();
 		// ReadJson json_obj = new ReadJson();
 		Reader reader = null;
 		try {
