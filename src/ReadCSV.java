@@ -1,10 +1,10 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -13,6 +13,7 @@ import org.apache.commons.csv.CSVRecord;
 public class ReadCSV {
 
 	private String[][] data;
+	Map<String, Integer> headerMap;
 	/*
 	 * public void read1() { String csvFile = "files/data.csv"; BufferedReader
 	 * br = null; String separator = ","; String line; data = null;
@@ -34,13 +35,12 @@ public class ReadCSV {
 	 */
 	public int read(Reader reader) throws IOException {
 		final CSVParser parser;
-		this.data = null; // clean the data
+		reset();
 		long record_number;
 		List<CSVRecord> records;
-		Map<String, Integer> headerMap;
 
 		parser = new CSVParser(reader, CSVFormat.EXCEL.withHeader());
-		headerMap = parser.getHeaderMap();
+		this.headerMap = parser.getHeaderMap();
 		records = parser.getRecords();
 		data = new String[(int) records.size()][headerMap.size()];
 		for (String columnName : headerMap.keySet()) {
@@ -54,6 +54,34 @@ public class ReadCSV {
 		return 0;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(toStringMap());
+		for (int record = 0; record < data.length; record++) {
+			for (int column = 0; column < 1;) {
+
+			}
+		}
+
+		return null;
+	}
+
+	private String toStringMap() {
+		Set<String> colNames = headerMap.keySet();
+		StringBuilder sb = new StringBuilder();
+		Iterator<String> pop = colNames.iterator();
+		
+ 		for (;pop.hasNext();){
+			sb.append(pop.next().toString());
+ 			if(!pop.hasNext()){
+				return sb.toString();
+			}
+			sb.append(", ");
+		}
+ 		return null;
+	}
+
 	public void print() {
 		try {
 			final Appendable out;
@@ -62,5 +90,10 @@ public class ReadCSV {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void reset() {
+		this.data = null; // clean the data
+		this.headerMap = null;
 	}
 }
