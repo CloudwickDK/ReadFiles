@@ -1,33 +1,54 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.Writer;
+
+import readJson.ReadJson;
+import readcsv.ReadCSV;
 
 public class Main {
 
 	public static void main(String[] args) {
 
 		ReadCSV csv_obj = new ReadCSV();
-		// ReadJson json_obj = new ReadJson();
-		Reader reader = null;
+		ReadJson json_obj = new ReadJson();
+		
+		Reader csv_reader = null;
+		Reader json_reader = null;
+		Writer writer = null;
 		try {
-			reader = new FileReader("files/data.csv");
-			csv_obj.read(reader);
+			//readers
+			csv_reader = new FileReader("files/data.csv");
+			json_reader = new FileReader("files/data.json");
+			//writers
+			writer = new FileWriter("files/written_data.json");
+			//read the files
+			csv_obj.read(csv_reader);
+			readJson.Employee employee = json_obj.read(json_reader);
+			
+			//write
+			System.out.println(employee);
+			//json_obj.write(writer, employee);
+			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (reader != null) {
-					reader.close();
+			try { //close the readers
+				if (csv_reader != null) {
+					csv_reader.close();
+				}
+				if (json_reader != null) {
+					json_reader.close();
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		// json_obj.read();
+		System.out.println("Done");
 	}
 }
