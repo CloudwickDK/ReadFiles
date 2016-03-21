@@ -34,6 +34,4 @@ public class ReadJson {
 		
 		return 0;
 	}
-
-	
 }
