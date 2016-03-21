@@ -12,13 +12,13 @@ import com.google.gson.reflect.TypeToken;
 public class ReadJson {
 	
 
-	public Employee read(Reader reader){
+	public List<Employee> read(Reader reader){
 		
 		Gson gson = new GsonBuilder().create();
-	    Employee employee  = gson.fromJson(reader, Employee.class);
+	    //Employee employee  = gson.fromJson(reader, Employee.class);
 	    
-		//TypeToken token = new TypeToken<List<Employee>>(){};    
-		//Employee employee = gson.fromJson(reader, token.getType());
+		TypeToken token = new TypeToken<List<Employee>>(){};    
+		List<Employee> employee = gson.fromJson(reader, token.getType());
 	    return employee;
 		}
 	public int write(Writer writer, Employee employee){

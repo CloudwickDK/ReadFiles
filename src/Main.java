@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,11 +30,11 @@ public class Main {
 			writer = new FileWriter("files/written_data.json");
 			// read the files
 			csv_obj.read(csv_reader);
-			readJson.Employee employee = json_obj.read(json_reader);
+			List<readJson.Employee> employee = json_obj.read(json_reader);
 
 			// write
 			//System.out.println(employee);
-			// json_obj.write(writer, employee);
+			 //json_obj.write(writer, employee);
 
 			Gson gson = new GsonBuilder().create();
 			System.out.println(gson.toJson(employee));
