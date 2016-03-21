@@ -34,7 +34,7 @@ public class Main {
 
 			// write
 			//System.out.println(employee);
-			 //json_obj.write(writer, employee);
+			 json_obj.write(writer, employee);
 
 			Gson gson = new GsonBuilder().create();
 			System.out.println(gson.toJson(employee));
