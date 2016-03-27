@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -10,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import readJson.ReadJson;
+import readXml.ReadXml;
 import readcsv.ReadCSV;
 
 public class Main {
@@ -18,6 +20,7 @@ public class Main {
 
 		ReadCSV csv_obj = new ReadCSV();
 		ReadJson json_obj = new ReadJson();
+		ReadXml xml_obj = new ReadXml();
 
 		Reader csv_reader = null;
 		Reader json_reader = null;
@@ -26,18 +29,21 @@ public class Main {
 			// readers
 			csv_reader = new FileReader("files/data.csv");
 			json_reader = new FileReader("files/data.json");
+			//file obj for json file
+			File xml_file = new File("files/data.xml");
 			// writers
 			writer = new FileWriter("files/written_data.json");
+			String FileName = "files/witten_data.xml";
 			// read the files
 			csv_obj.read(csv_reader);
-			List<readJson.Employee> employee = json_obj.read(json_reader);
-
+			List<readJson.Employee> json_employees = json_obj.read(json_reader); // list of json employees
+			List xml_employees = xml_obj.read(xml_file); // list of xml emloyees
 			// write
-			//System.out.println(employee);
-			 json_obj.write(writer, employee);
+			 json_obj.write(writer, json_employees);
+			 xml_obj.write(FileName);
 
 			Gson gson = new GsonBuilder().create();
-			System.out.println(gson.toJson(employee));
+			System.out.println(gson.toJson(json_employees));
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

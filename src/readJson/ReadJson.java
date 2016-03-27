@@ -21,6 +21,7 @@ public class ReadJson {
 		List<Employee> employee = gson.fromJson(reader, token.getType());
 	    return employee;
 		}
+	
 	public int write(Writer writer, List<Employee> employees){
 		
 		Gson gson = new Gson();
